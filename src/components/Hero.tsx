@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, useTransform, Variants } from 'framer-motion';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -24,7 +24,7 @@ const ACCENT = '#00e5ff';
 
 // ─── Animation Variants ─────────────────────────────────────────────────────
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: {},
   visible: {
     transition: {
@@ -34,7 +34,7 @@ const containerVariants = {
   },
 };
 
-const fadeInUp = {
+const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 32, filter: 'blur(6px)' },
   visible: {
     opacity: 1,
@@ -44,7 +44,7 @@ const fadeInUp = {
   },
 };
 
-const roleVariants = {
+const roleVariants: Variants = {
   enter: { opacity: 0, y: 24, filter: 'blur(8px)', scale: 0.95 },
   center: {
     opacity: 1,
@@ -62,7 +62,7 @@ const roleVariants = {
   },
 };
 
-const hexagonVariants = {
+const hexagonVariants: Variants = {
   hidden: { opacity: 0, scale: 0.7, rotate: -12 },
   visible: {
     opacity: 1,
