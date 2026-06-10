@@ -1,21 +1,23 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 
 const skills = [
-  { name: 'React', icon: '⚛️', category: 'Frontend' },
-  { name: 'Next.js', icon: '▲', category: 'Framework' },
-  { name: 'TypeScript', icon: '📘', category: 'Language' },
-  { name: 'Node.js', icon: '🟢', category: 'Backend' },
-  { name: 'Python', icon: '🐍', category: 'Language' },
-  { name: 'Java', icon: '☕', category: 'Language' },
-  { name: 'Cybersecurity', icon: '🔐', category: 'Security' },
-  { name: 'AI / ML', icon: '🧠', category: 'Intelligence' },
-  { name: 'Cloud', icon: '☁️', category: 'Infrastructure' },
-  { name: 'GitHub', icon: '🐙', category: 'DevOps' },
-  { name: 'Tailwind CSS', icon: '🎨', category: 'Styling' },
-  { name: 'Docker', icon: '🐳', category: 'DevOps' },
+  { name: 'React', category: 'Frontend' },
+  { name: 'Next.js', category: 'Framework' },
+  { name: 'TypeScript', category: 'Language' },
+  { name: 'Node.js', category: 'Backend' },
+  { name: 'Python', category: 'Language' },
+  { name: 'Java', category: 'Language' },
+  { name: 'TensorFlow', category: 'AI / ML' },
+  { name: 'AWS / Cloud', category: 'Infrastructure' },
+  { name: 'Docker', category: 'DevOps' },
+  { name: 'Kubernetes', category: 'DevOps' },
+  { name: 'D3.js', category: 'Visualisation' },
+  { name: 'Tailwind CSS', category: 'Styling' },
+  { name: 'Cybersecurity', category: 'Security' },
+  { name: 'GitHub', category: 'DevOps' },
 ];
 
 export default function Skills() {
@@ -23,43 +25,71 @@ export default function Skills() {
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="skills" className="relative py-28 px-6" ref={ref}>
-      {/* Ambient glow */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] pointer-events-none opacity-20"
-        style={{ background: 'radial-gradient(circle, rgba(0,229,255,0.06) 0%, transparent 70%)' }} />
+    <section id="skills">
+      <div className="container">
+        <span className="section-label">Tech Stack</span>
+        <h2>Technologies I work with</h2>
 
-      <div className="max-w-6xl mx-auto">
-        {/* Section Header */}
         <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
+          ref={ref}
+          className={isInView ? 'fade-in visible' : 'fade-in'}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.6 }}
+          style={{ marginTop: '3rem' }}
         >
-          <h2 className="section-title text-white mb-4">
-            Tech <span className="glow-text">Stack</span>
-          </h2>
-          <p className="section-subtitle mx-auto">
-            Technologies and tools I use to bring ideas to life and build exceptional digital products.
-          </p>
+          <div
+            className="grid overflow-hidden"
+            style={{
+              gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+              gap: '1px',
+              background: 'var(--color-border)',
+              border: '1px solid var(--color-border)',
+              borderRadius: 4,
+            }}
+          >
+            {skills.map((skill) => (
+              <div
+                key={skill.name}
+                className="flex justify-between items-center transition-colors duration-150"
+                style={{
+                  background: 'var(--color-cream)',
+                  padding: '1.25rem 1.5rem',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'var(--color-surface)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'var(--color-cream)';
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: '14px',
+                    fontWeight: 500,
+                    color: 'var(--color-ink)',
+                  }}
+                >
+                  {skill.name}
+                </span>
+                <span
+                  style={{
+                    fontFamily: 'var(--font-mono), monospace',
+                    fontSize: '10px',
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                    color: 'var(--color-ink-muted)',
+                    background: 'var(--color-surface-2)',
+                    padding: '3px 8px',
+                    borderRadius: 2,
+                  }}
+                >
+                  {skill.category}
+                </span>
+              </div>
+            ))}
+          </div>
         </motion.div>
-
-        {/* Skills Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-6 gap-5">
-          {skills.map((skill, i) => (
-            <motion.div
-              key={skill.name}
-              className="skill-card"
-              initial={{ opacity: 0, y: 25 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 + i * 0.06 }}
-            >
-              <span className="skill-icon">{skill.icon}</span>
-              <h3 className="text-white font-semibold text-sm mb-1">{skill.name}</h3>
-              <p className="text-[#94a3b8] text-xs">{skill.category}</p>
-            </motion.div>
-          ))}
-        </div>
       </div>
     </section>
   );

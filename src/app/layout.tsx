@@ -1,21 +1,30 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Playfair_Display, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
+  weight: ["300", "400", "500"],
+});
+
+const jetbrains = JetBrains_Mono({
+  variable: "--font-jetbrains",
+  subsets: ["latin"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
-  title: "John Kendric | Premium Portfolio — Developer, Creator & Innovator",
+  title: "Preetam Hosamani — Frontend Developer",
   description:
-    "Full-stack developer and creative technologist crafting premium digital experiences. Expertise in React, Next.js, TypeScript, AI/ML, and cloud architecture.",
+    "Crafting immersive digital experiences at the intersection of design and engineering — pixel-perfect interfaces, fluid animations, and systems that feel alive.",
   keywords: [
     "developer",
     "portfolio",
@@ -25,12 +34,12 @@ export const metadata: Metadata = {
     "full-stack",
     "frontend",
     "ui/ux",
-    "john kendric",
+    "preetam hosamani",
   ],
   openGraph: {
-    title: "John Kendric | Premium Portfolio",
+    title: "Preetam Hosamani — Frontend Developer",
     description:
-      "Full-stack developer and creative technologist crafting premium digital experiences.",
+      "Crafting immersive digital experiences at the intersection of design and engineering.",
     type: "website",
   },
 };
@@ -43,9 +52,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${playfair.variable} ${dmSans.variable} ${jetbrains.variable} antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body>{children}</body>
     </html>
   );
 }
